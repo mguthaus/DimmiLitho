@@ -2,7 +2,6 @@
 """
 import numpy as np
 import pyfftw
-import scipy as sci
 
 from litho.lens import LensList
 from litho.source import Source
@@ -26,7 +25,7 @@ class TCC:
 
     def calMutualIntensity(self):
         self.gnum, self.fnum = self.s.data.shape
-        J = np.zeros((self.gnum, self.fnum, self.gnum, self.fnum), dtype=np.complex)
+        J = np.zeros((self.gnum, self.fnum, self.gnum, self.fnum), dtype=complex)
         for ii in range(self.gnum):
             for jj in range(self.fnum):
                 J[:, :, ii, jj] = self.s.spatMutualData.real[
@@ -58,10 +57,10 @@ class TCC:
 
         tcc2df = tcc4df.reshape((self.gnum * self.fnum, self.gnum * self.fnum))
 
-        # U,S,V = np.linalg.svd(tcc2df)
-        U, S, V = sci.sparse.linalg.svds(tcc2df, self.order)  # faster than svd
+        U, S, V = np.linalg.svd(tcc2df)
+        # U, S, V = sci.sparse.linalg.svds(tcc2df, self.order)  # faster than svd
         self.coefs = S[0 : self.order]
-        self.kernels = np.zeros((self.gnum, self.fnum, self.order), dtype=np.complex)
+        self.kernels = np.zeros((self.gnum, self.fnum, self.order), dtype=complex)
         for ii in range(self.order):
             self.kernels[:, :, ii] = np.reshape(U[:, ii], (self.gnum, self.fnum))
 

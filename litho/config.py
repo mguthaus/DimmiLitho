@@ -20,6 +20,7 @@ class Path:
     module = module_path
     repo = repo_path
     gdsdir = repo_path / "NanGateLibGDS"
+    sky130gdsdir = repo_path / "sky130gds"
     samples = module_path / "samples"
 
 

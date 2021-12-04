@@ -19,12 +19,12 @@ class ILT:
 
         import matplotlib.pyplot as plt
 
-        from litho.config import PATH
-        from litho.lens import LensList
-        from litho.tcc import TCCList
-        from litho.mask import Mask
-        from litho.source import Source
-        from litho.ilt import RobustILT
+        from config import PATH
+        from lens import LensList
+        from tcc import TCCList
+        from mask import Mask
+        from source import Source
+        from ilt import RobustILT
 
         m = Mask()
         m.x_gridsize = 2.5
@@ -186,6 +186,7 @@ class ILT:
             deta = self.grad + self.regWeight * self.regGrad
         else:
             deta = self.grad
+
         stepsize = self.stepSize / np.max(abs(deta))
         newTheta = self.masktheta - stepsize * deta
 
@@ -315,6 +316,7 @@ class RobustILT(ILT):
             self.image.calculate()
             self.robustCostFunction()
             self.calRobustGrad()
+            # self.calGrad()
             self.calRegTerm()
             self.updateThetaConstSize()
             print(
@@ -330,11 +332,11 @@ if __name__ == "__main__":
 
     import time
 
-    from litho.config import PATH
-    from litho.lens import LensList
-    from litho.mask import Mask
-    from litho.source import Source
-    from litho.tcc import TCCList
+    from config import PATH
+    from lens import LensList
+    from mask import Mask
+    from source import Source
+    from tcc import TCCList
 
     a = time.time()
     m = Mask()
