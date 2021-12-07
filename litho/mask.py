@@ -158,17 +158,17 @@ class Mask:
             self.ymin = b_ymin
             self.ymax = b_ymax
         except ValueError:
-            print("Using percentage boundary: {}".format(boundary))
+            #print("Using percentage boundary: {}".format(boundary))
             # Use a percentage boundary
             self.xmin = xmin - boundary * (xmax - xmin)
             self.xmax = xmax + boundary * (xmax - xmin)
             self.ymin = ymin - boundary * (ymax - ymin)
             self.ymax = ymax + boundary * (ymax - ymin)
-        print(
-            "Boundary: {0},{1} {2},{3}".format(
-                self.xmin, self.ymin, self.xmax, self.ymax
-            )
-        )
+        # print(
+        #     "Boundary: {0},{1} {2},{3}".format(
+        #         self.xmin, self.ymin, self.xmax, self.ymax
+        #     )
+        # )
 
         self.x_range = [self.xmin, self.xmax]
         self.y_range = [self.ymin, self.ymax]
